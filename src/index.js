@@ -1,7 +1,8 @@
 import './css/styles.css';
+
 import Notiflix from 'notiflix';
 import debounce from 'lodash.debounce'
-// import include from 'posthtml-include'
+
 
 import { fetchCountries } from './js/fetchCountries';
 
@@ -23,7 +24,7 @@ function onSearchedConuntryInput(e) {
     fetchCountries(nameCountry)
         .then(renderMarkup)
         .catch(onFetchError)
-        // .finally(() => e.target.value = '')
+        
        
    }
 
@@ -41,13 +42,13 @@ function renderMarkup(arrey) {
 
 function renderCountryCard({flags, name, capital, population, languages}) {
     refs.countryList.innerHTML=''
-    refs.countryInfo.innerHTML = `<img src="${flags.svg}" alt="country flag" class="flag-img">
-<h1>${name.official}</h1>
-<p>Capital: ${capital}</p>
-<p>Population: ${population}</p>
-<p>Lenguages: ${languages}</p>`
+    refs.countryInfo.innerHTML =
+        `<img src="${flags.svg}" alt="country flag" class="flag-img">
+        <h1>${name.official}</h1>
+        <p> <b>Capital:</b> ${capital}</p>
+        <p> <b>Population:</b> ${population}</p>
+        <p> <b>Lenguages:</b> ${Object.values(languages)}</p>`
 
-    // refs.searchedConuntry.value = ''
 }
 
 
@@ -56,7 +57,7 @@ function renderCountryList(countries) {
 const markup = countries
   .map((country) => `<li>
     <img src="${country.flags.png}" alt="country flag" class="flag-img">
-    <h1>${country.name.official}</h1>
+    <p class="country-list">${country.name.official}</p>
     </li>`)
   .join("");
 
